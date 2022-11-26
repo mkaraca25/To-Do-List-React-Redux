@@ -7,12 +7,11 @@
 }
 .list>div{
   padding:8px 0;
-  border-bottom:1px solid #ccc;
 }
 .list>div:last-child{border-bottom:0;}
 .done{
-  text-decoration: line-through;
-  
-}.done .Completed{
+  text-decoration: line-through;}
+.done .Completed{
     background-color:green;
-  }
+    border-radius:20px;
+ }

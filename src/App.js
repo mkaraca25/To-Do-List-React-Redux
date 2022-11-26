@@ -2,19 +2,19 @@ import './App.css';
 import { connect } from "react-redux"
 import { addList, Completed, ClearAll } from './actions'
 import { useState } from 'react';
-import { BiRadioCircle } from 'react-icons/bi'
-import { MdOutlineDone } from 'react-icons/md'
+import {  BiRadioCircle } from 'react-icons/bi'
 import { FcTodoList } from 'react-icons/fc'
 const App = (props) => {
   const [text, setText] = useState("");
   console.log(props);
   return (
-    <div className="flex mt-20 justify-center items-center">
+    <div className="flex mt-20  justify-center items-center">
       <div className='relative space-x-5'><h1 className='flex font-extrabold '><FcTodoList size={30} />Daily To Do List</h1>
-        <div className='flex w-full h-8  mt-10'>
-          <div className='p-1 h-8'><input placeholder='Add new list item'
+        <div className='flex border rounded-lg  w-80 h-10 mt-10'>
+          <div className='p-2 h-10 '>
+            <input placeholder='Add new list item'
             value={text} onChange={e => setText(e.target.value)} /></div>
-          <div className='text-white bg-blue-600 w-14 h-8 p-0.5  text-center rounded-b-lg'><button
+          <div className='text-white ml-20  bg-blue-600 w-14 h-10 p-2  text-center rounded-b-lg'><button
             onClick={() => {
               setText("");
               props.addList(text)
@@ -23,18 +23,18 @@ const App = (props) => {
         <div className='list' >
           {props.list.map(item => (
             <div onClick={() => props.Completed(item.id)} key={item.id} className=
-              {item.completed ? "done" : ""}>
+              {item.completed ? "done": ""}>
               <div className='flex'>
                 <div className='Completed' >
                   <div><BiRadioCircle size={28} /></div>
                 </div><div className='font-semibold hover:text-blue-600'>{item.title}
                 </div>
-              </div><br/>
+              </div>
             </div>
           ))}
         </div>
         <hr />
-        <div className='flex space-x-32'>
+        <div className='flex space-x-40'>
           <div className=' space-x-4'>
             {props.list.length} item selected
           </div>
