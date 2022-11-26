@@ -1,25 +1,55 @@
-import logo from './logo.svg';
 import './App.css';
-
-function App() {
+import { connect } from "react-redux"
+import { addList, Completed, ClearAll } from './actions'
+import { useState } from 'react';
+import { BiRadioCircle } from 'react-icons/bi'
+import { MdOutlineDone } from 'react-icons/md'
+import { FcTodoList } from 'react-icons/fc'
+const App = (props) => {
+  const [text, setText] = useState("");
+  console.log(props);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="flex mt-20 justify-center items-center">
+      <div className='relative space-x-5'><h1 className='flex font-extrabold '><FcTodoList size={30} />Daily To Do List</h1>
+        <div className='flex w-full h-8  mt-10'>
+          <div className='p-1 h-8'><input placeholder='Add new list item'
+            value={text} onChange={e => setText(e.target.value)} /></div>
+          <div className='text-white bg-blue-600 w-14 h-8 p-0.5  text-center rounded-b-lg'><button
+            onClick={() => {
+              setText("");
+              props.addList(text)
+            }}>Add</button></div>
+        </div>
+        <div className='list' >
+          {props.list.map(item => (
+            <div onClick={() => props.Completed(item.id)} key={item.id} className=
+              {item.completed ? "done" : ""}>
+              <div className='flex'>
+                <div className='Completed' >
+                  <div><BiRadioCircle size={28} /></div>
+                </div><div className='font-semibold hover:text-blue-600'>{item.title}
+                </div>
+              </div><br/>
+            </div>
+          ))}
+        </div>
+        <hr />
+        <div className='flex space-x-32'>
+          <div className=' space-x-4'>
+            {props.list.length} item selected
+          </div>
+          <div ><button onClick={() => props.ClearAll()}>Clear All</button></div>
+        </div>
+      </div>
+
     </div>
   );
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    list: state.list
+  }
+}
+export default connect(mapStateToProps, { addList, Completed, ClearAll })(App);
+
