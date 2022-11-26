@@ -10,8 +10,10 @@
 }
 .list>div:last-child{border-bottom:0;}
 .done{
-  text-decoration: line-through;}
+  text-decoration: line-through;
+}
 .done .Completed{
     background-color:green;
     border-radius:20px;
+    border:none;
  }

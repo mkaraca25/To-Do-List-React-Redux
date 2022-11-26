@@ -2,11 +2,11 @@ import './App.css';
 import { connect } from "react-redux"
 import { addList, Completed, ClearAll } from './actions'
 import { useState } from 'react';
-import {  BiRadioCircle } from 'react-icons/bi'
+import { BiRadioCircle } from 'react-icons/bi'
+import { MdDone } from 'react-icons/md'
 import { FcTodoList } from 'react-icons/fc'
 const App = (props) => {
   const [text, setText] = useState("");
-  console.log(props);
   return (
     <div className="flex mt-20  justify-center items-center">
       <div className='relative space-x-5'><h1 className='flex font-extrabold '><FcTodoList size={30} />Daily To Do List</h1>
@@ -16,18 +16,22 @@ const App = (props) => {
             value={text} onChange={e => setText(e.target.value)} /></div>
           <div className='text-white ml-20  bg-blue-600 w-14 h-10 p-2  text-center rounded-b-lg'><button
             onClick={() => {
+              if(text===""){
+                alert("Please enter value")
+              }else{
               setText("");
-              props.addList(text)
+              props.addList(text)}
             }}>Add</button></div>
         </div>
-        <div className='list' >
+        <div className='list ' >
           {props.list.map(item => (
-            <div onClick={() => props.Completed(item.id)} key={item.id} className=
-              {item.completed ? "done": ""}>
+            <div onClick={() => props.Completed(item.id)} key={item.id}
+            className={item.completed?"done":""}><div className='
+            fixed text-white bg-green-700 rounded-2xl'>{item.completed &&<MdDone size={28}/>}</div>
               <div className='flex'>
                 <div className='Completed' >
                   <div><BiRadioCircle size={28} /></div>
-                </div><div className='font-semibold hover:text-blue-600'>{item.title}
+                </div><div className='font-semibold ml-2 hover:text-blue-600'>{item.title}
                 </div>
               </div>
             </div>
