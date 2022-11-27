@@ -9,7 +9,7 @@ const App = (props) => {
   const [text, setText] = useState("");
   return (
     <div className="flex mt-20   justify-center items-center">
-      <div className='relative space-x-5'><h1 className='flex font-extrabold '><FcTodoList size={30} />Mkaraca To Do List</h1>
+      <div className='relative space-x-5'><h1 className='flex font-extrabold '><FcTodoList size={30} />Daily To Do List</h1>
         <div className='flex border p-1 rounded-md w-80 h-10 mt-10'>
           <div className=''>
             <input className="outline-none p-1"  placeholder='Add new list item'
